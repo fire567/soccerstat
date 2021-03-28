@@ -18,22 +18,20 @@ class App extends React.Component {
   }
 
   onTermSubmit = async () => {
-    const response = await API.get('/' ,{
-        headers: { "X-Auth-Token":"541d3a3e77434134b7eebc7ded2a5e46", }, 
-      
-    })
+    const response = await API.get('/')
     this.setState({ competitions: response.data.competitions })
-   console.log(this.state.competitions)
+    
   }
   
   render(){
+    //console.log(this.state.competitions[0].id)
   return (
     <div className="App">
       <Header />
       <div className="content">
-        {this.state.competitions &&
+        
           <Route path="/leagues"  render={() => <Leagues competitions={this.state.competitions}/>} exact/>
-        }
+        
       </div>
     </div>
   );

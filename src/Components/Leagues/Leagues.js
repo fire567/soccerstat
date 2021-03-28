@@ -1,37 +1,46 @@
-import React, { useState } from "react";
-import Period from "../Period/Period";
+import React, { useState, useEffect } from "react";
+import Year from "../Year/Year"
 import "./Leagues.css";
 
 const Leagues = ({ competitions }) => {
-   const [firstDate, setFirstDate] = useState("");
-   const [secondDate, setSecondDate] = useState("");
+   const [year, setYear] = useState(0);
 
-   const changedDate = (start, last) => {
-    setFirstDate(start)
-    setSecondDate(last)
+   const changedYear = (year) => {
+    setYear(year)
    }
-   
-   const condition = (index) => {
-        if(firstDate === ""){
-            return true;
-        }else if( firstDate > competitions[index].currentSeason.startDate){
-            
-            return false;
+
+
+
+const show = (item) => {
+    if( year === 0){
+        return(
+            <div>{item.name}</div>
+        )
+    }else if(item.currentSeason !== null){
+        var date = new Date(item.currentSeason.startDate); 
+        console.log(date.getFullYear())
+        if(year === date.getFullYear()){
+            return(
+                <div>{item.name}</div>
+            )
         }
-   }
-
-   console.log(competitions[0].currentSeason.startDate)
-
-   
         
+    }
+}
+
+
 
     return(
         <div>
-            <Period changedDate={changedDate}/>
-            <div className="column">{competitions.map((competition, index) =>  (
-                 !condition(index) &&
-                <div key={competition.id}>{competition.id}</div>
-        ))}</div>
+            <Year changedYear={changedYear}/>
+            <div className="column">
+                {competitions ? 
+                    competitions.map((item) => (
+                        show(item)
+                    ))
+                    : "asd"
+                    }
+            </div>
        </div>
     );
 };
