@@ -9,7 +9,10 @@ class App extends React.Component {
 
   constructor() {
     super();
-    this.state = {competitions: null}
+    this.state = {
+      competitions: null,
+      currentLink: "competitions"
+    }
   }
 
 
@@ -18,20 +21,24 @@ class App extends React.Component {
   }
 
   onTermSubmit = async () => {
-    const response = await API.get('/')
+    const response = await API.get(`/${this.state.currentLink}`)
     this.setState({ competitions: response.data.competitions })
-    
+    console.log(response.data)
+  }
+
+  changedLink = (link) => {
+    this.setState({ currentLink: link })
   }
   
   render(){
-    //console.log(this.state.competitions[0].id)
+    console.log(this.state.currentLink)
   return (
     <div className="App">
-      <Header />
+      <Header changedLink={this.changedLink}/>
       <div className="content">
-        
-          <Route path="/leagues"  render={() => <Leagues competitions={this.state.competitions}/>} exact/>
-        
+          <div> 
+            <Route path="/leagues"  render={() => <Leagues competitions={this.state.competitions}/>} exact/>
+          </div>
       </div>
     </div>
   );

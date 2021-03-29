@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const Year = ({ changedYear }) => {
-    const [currentYear, setCurrentYear] = useState(0)
+const Year = ({ changedYear, deletedId}) => {
+    const [currentYear, setCurrentYear] = useState("")
 
     const onYearChange = (e) => {
         setCurrentYear(e.target.value)
@@ -11,16 +11,18 @@ const Year = ({ changedYear }) => {
     const YearSubmit = (e) => {
         e.preventDefault()
         changedYear(currentYear)
+        deletedId("")
     }
 
     return(
         <form onSubmit={e => YearSubmit(e)}>
+            Год:
             <input 
-                type="text"
+                type="number"
                 value={currentYear}
                 onChange={e => onYearChange(e)}
             ></input>
-            <input type="submit"></input>
+            <input type="submit" value="найти"></input>
         </form>
     )
 }
