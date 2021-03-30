@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 import Year from "../Year/Year";
 import Search from "../Search/Search";
 import "./Leagues.css";
 
-const Leagues = ({ competitions }) => {
+const Leagues = ({ competitions, changedLink }) => {
    const [year, setYear] = useState("");
    const [id, setid] = useState("")
 
@@ -23,22 +24,32 @@ const Leagues = ({ competitions }) => {
         setYear(year)
     }
 
+    const changeLink = (id) => {
+        changedLink(`competitions/${id}/matches`)
+    }
+
     const filteredTeams = (item) => {
         if( year === "" && id === ""){
             return(
-                <div key={item.id}>{item.name}</div>
+                <Link to="leagues/matches" key={item.id} onClick={() => changeLink(item.id)}>
+                        <div>{item.name}</div>
+                </Link>
             )
         }else if(item.currentSeason !== null){
             var date = new Date(item.currentSeason.startDate); 
             var years = new Date(year);
             if(years.getFullYear() === date.getFullYear() && id === ""){
                 return(
-                    <div key={item.id} >{item.name}</div>
+                    <Link to="leagues/matches" key={item.id} onClick={() => changeLink(item.id)}>
+                        <div>{item.name}</div>
+                    </Link>
                 )  
             }  
             else if(id === String(item.id) && year === ""){
                 return(
-                     <div key={item.id} >{item.name}</div>
+                    <Link to="leagues/matches" key={item.id} onClick={() => changeLink(item.id)}>
+                        <div>{item.name}</div>
+                    </Link>
             )  
             }     
             

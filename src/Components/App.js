@@ -1,48 +1,56 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import Header from "./Header/header";
 import Leagues from "./Leagues/Leagues";
+import Matches from "./Matches/Matches";
 import API from "../apis/API.js";
 import { Route } from "react-router-dom";
 
 
-class App extends React.Component {
+const App = () => {
 
-  constructor() {
-    super();
-    this.state = {
-      competitions: null,
-      currentLink: "competitions"
+  const [ competitions, setCompetitions ] = useState(null)
+  const [ matches, setMatches ] = useState(null)
+  const [newSinceDate, setNewSinceDate] = useState("")
+  const [newEndDate, setNewEndDate] = useState("")
+  const [ currentLink, setCurrentLink ] = useState("competitions")
+ 
+
+
+  useEffect(() => {
+    const onTermSubmit = async () => {
+      const response = await API.get(`${currentLink}`)
+      setCompetitions(response.data.competitions)
+      setMatches(response.data.matches)
+      console.log(currentLink)
     }
+    onTermSubmit()
+  }, [currentLink, newSinceDate,newEndDate])
+
+  
+
+  const changedLink = (link) => {
+    setCurrentLink(link)
   }
 
-
-  componentDidMount(){
-    this.onTermSubmit();
-  }
-
-  onTermSubmit = async () => {
-    const response = await API.get(`/${this.state.currentLink}`)
-    this.setState({ competitions: response.data.competitions })
-    console.log(response.data)
-  }
-
-  changedLink = (link) => {
-    this.setState({ currentLink: link })
+  const changedDates = (since, end) => {
+    setNewSinceDate(since)
+    setNewEndDate(end)
+    console.log(since)
   }
   
-  render(){
-    console.log(this.state.currentLink)
+
+  
   return (
     <div className="App">
-      <Header changedLink={this.changedLink}/>
+      <Header changedLink={changedLink}/>
       <div className="content">
           <div> 
-            <Route path="/leagues"  render={() => <Leagues competitions={this.state.competitions}/>} exact/>
+            <Route path="/leagues"  render={() => <Leagues competitions={competitions} changedLink={changedLink}/>} exact/>
+            <Route path="/leagues/matches"  render={() => <Matches matches={matches} changedDates={changedDates}/>}  exact/>
           </div>
       </div>
     </div>
   );
-  }
 }
 
 export default App;

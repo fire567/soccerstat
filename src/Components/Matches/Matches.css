@@ -1,0 +1,28 @@
+.matches-form{
+    padding-left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    padding-top: 20px;
+}
+
+.match-form{
+    border: 1px solid black;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.score-form{
+    display:flex;
+    padding-left: 49%;
+    font-size: medium;
+}
+
+.teams{
+    font-size: large;
+}
+
+.year-input{
+    text-align: center;
+}
+
