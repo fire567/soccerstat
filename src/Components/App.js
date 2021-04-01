@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import Header from "./Header/header";
 import Leagues from "./Leagues/Leagues";
 import Matches from "./Matches/Matches";
+import {Context} from "./context";
 import API from "../apis/API.js";
 import { Route } from "react-router-dom";
 
@@ -41,6 +42,7 @@ const App = () => {
 
   
   return (
+    <Context.Provider value={}>
     <div className="App">
       <Header changedLink={changedLink}/>
       <div className="content">
@@ -50,6 +52,7 @@ const App = () => {
           </div>
       </div>
     </div>
+    </Context.Provider>
   );
 }
 

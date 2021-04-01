@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Year from "../Period/Period";
+import { Context } from '../context'
 import "./Matches.css";
 
-const Matches = ({  matches, changedDates }) => {
+const Matches = ({ changedDates }) => {
     const [newSinceDate, setNewSinceDate] = useState("")
     const [newEndDate, setNewEndDate] = useState("")
 
+    const matches = useContext(Context)
+    console.log(matches)
 
     const getNewDate = (firstDate, secondDate) => {
         setNewSinceDate(firstDate);
@@ -14,7 +17,6 @@ const Matches = ({  matches, changedDates }) => {
     };
     
     const showMatches = (match) => {
-        //console.log(typeof newSinceDate)
         //var sinceDate = new Date(newSinceDate)
         if(match.utcDate >= newSinceDate && match.utcDate <= newEndDate){
             console.log(newSinceDate)
