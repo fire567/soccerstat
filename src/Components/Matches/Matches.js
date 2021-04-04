@@ -1,14 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Year from "../Period/Period";
-import { Context } from '../context'
 import "./Matches.css";
 
-const Matches = ({ changedDates }) => {
+const Matches = ({ changedDates, matches }) => {
     const [newSinceDate, setNewSinceDate] = useState("")
     const [newEndDate, setNewEndDate] = useState("")
-
-    const matches = useContext(Context)
-    console.log(matches)
 
     const getNewDate = (firstDate, secondDate) => {
         setNewSinceDate(firstDate);
@@ -17,12 +13,15 @@ const Matches = ({ changedDates }) => {
     };
     
     const showMatches = (match) => {
-        //var sinceDate = new Date(newSinceDate)
-        if(match.utcDate >= newSinceDate && match.utcDate <= newEndDate){
-            console.log(newSinceDate)
-            console.log(match.utcDate)
+        var since = new Date(newSinceDate);
+        var end = new Date(newEndDate);
+        var matchDate = new Date(match.utcDate);
+        
+        if(matchDate >= since && matchDate <= end.setHours(23,59,59)){
+            console.log(matchDate)
+            console.log(end)
             return(
-                <div class="match-form">
+                <div className="match-form" key={match.id}>
                     <div className="teams">
                         {match.awayTeam.name} vs {match.homeTeam.name}
                     </div>
@@ -41,8 +40,9 @@ const Matches = ({ changedDates }) => {
                 </div>
             )
         }
-        return(
-            <div class="match-form">
+        else{
+            return(
+            <div className="match-form" key={match.id}>
                     <div className="teams">
                         {match.awayTeam.name} vs {match.homeTeam.name}
                     </div>
@@ -59,7 +59,8 @@ const Matches = ({ changedDates }) => {
                         {match.utcDate}
                     </div>
                 </div>
-        )
+            )
+        }
        
     }
 

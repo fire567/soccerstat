@@ -26,9 +26,10 @@ const Leagues = ({ competitions, changedLink }) => {
 
     const changeLink = (id) => {
         changedLink(`competitions/${id}/matches`)
+        localStorage.setItem('Link', `competitions/${id}/matches`);
     }
 
-    const filteredTeams = (item) => {
+    const showLeags = (item) => {
         if( year === "" && id === ""){
             return(
                 <Link to="leagues/matches" key={item.id} onClick={() => changeLink(item.id)}>
@@ -62,10 +63,10 @@ const Leagues = ({ competitions, changedLink }) => {
         <div>
             <Year changedYear={changedYear} deletedId={deletedId}/>
             <Search changedId={changedId} deleteYear={deleteYear}/>
-            <div className="column">
+            <div className="leags-list">
                 {competitions ? 
                     competitions.map((item) => (
-                        filteredTeams(item)
+                        showLeags(item)
                     ))
                     : "Loading"
                     }
