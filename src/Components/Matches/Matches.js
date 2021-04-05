@@ -24,7 +24,7 @@ const Matches = ({ matches, changedDates }) => {
         
         if(match.utcDate >= newSinceDate && match.utcDate <= newEndDate){
             console.log("asd")
-            //console.log(match.utcDate)
+            console.log(match.utcDate)
             return(
                 <div key={match.id} className="match-form">
                 <div className="teams">
@@ -45,7 +45,8 @@ const Matches = ({ matches, changedDates }) => {
             </div>
             )
         }
-        else(
+        else{
+            return(
             <div key={match.id} className="match-form">
                     <div className="teams">
                         {match.awayTeam.name} vs {match.homeTeam.name}
@@ -63,7 +64,8 @@ const Matches = ({ matches, changedDates }) => {
                         {match.utcDate}
                     </div>
                 </div>
-        )
+            )
+        }
         
        
     }
