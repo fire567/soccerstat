@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Year from "../Year/Year";
 import Search from "../Search/Search";
-import { Link } from "react-router-dom";
 import "./Teams.css";
 
 const Teams = ({ teams }) => {
@@ -28,8 +27,6 @@ const Teams = ({ teams }) => {
 
     const showTeam = (team) => {
         var newYear = new Date(year);
-        //console.log(newYear.getFullYear())
-            console.log(team.founded)
         if(year === "" && newId === ""){
             return(
                     <div>{team.name}</div>
@@ -51,6 +48,7 @@ const Teams = ({ teams }) => {
         <div>
             <div className="search">
                 <Year changedYear={changedYear} deletedId={deletedId}/>
+                год основания
                 <Search changedId={changedId} deleteYear={deleteYear}/>
             </div>    
                     <div className="column">
