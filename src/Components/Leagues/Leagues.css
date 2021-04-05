@@ -1,3 +1,8 @@
 .leags-list{
     column-count: 5;
 }
+
+.serches-form{
+    padding-bottom: 20px;
+    display: flex;
+}

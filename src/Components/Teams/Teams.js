@@ -32,38 +32,34 @@ const Teams = ({ teams }) => {
             console.log(team.founded)
         if(year === "" && newId === ""){
             return(
-                <Link to="/teams/team" key={team.id}>
                     <div>{team.name}</div>
-                </Link>
             )
         }else if(newId === String(team.id)){
             
             return(
-                <Link to="/teams/team" key={team.id}>
                     <div>{team.name}</div>
-                </Link>
             );
         }else if(newYear.getFullYear() === team.founded){
             
             return(
-                <Link to="/teams/team" key={team.id}>
                     <div>{team.name}</div>
-                </Link>
             ); 
         }   
     }
 
     return(
         <div>
-           <Year changedYear={changedYear} deletedId={deletedId}/>
-           <Search changedId={changedId} deleteYear={deleteYear}/>
-            <div className="column">
-                {teams ? 
-                    teams.map((team) => (
-                        showTeam(team)
-                    ))
-                    : "Loading"
-                }
+            <div className="search">
+                <Year changedYear={changedYear} deletedId={deletedId}/>
+                <Search changedId={changedId} deleteYear={deleteYear}/>
+            </div>    
+                    <div className="column">
+                        {teams ? 
+                            teams.map((team) => (
+                                showTeam(team)
+                            ))
+                            : "Loading"
+                        }
             </div>
        </div>
     );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Search.css";
 
 
 const Search = ({ changedId, deleteYear }) => {
@@ -15,7 +16,7 @@ const Search = ({ changedId, deleteYear }) => {
     }
 
     return(
-        <form onSubmit={e => onSubmitChange(e)}>
+        <form className="search-form" onSubmit={e => onSubmitChange(e)}>
              Поиск по id:
              <input 
                 type="text"

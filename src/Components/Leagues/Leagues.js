@@ -26,11 +26,7 @@ const Leagues = ({ competitions, changedLink }) => {
 
     const changeLink = (id) => {
         changedLink(`competitions/${id}/matches`)
-<<<<<<< HEAD
-        localStorage.setItem('data', `competitions/${id}/matches`);
-=======
         localStorage.setItem('Link', `competitions/${id}/matches`);
->>>>>>> 93b7febe3c443141bcac7de6f0fcc6863a0b419a
     }
 
     const showLeags = (item) => {
@@ -65,8 +61,10 @@ const Leagues = ({ competitions, changedLink }) => {
 
     return(
         <div>
-            <Year changedYear={changedYear} deletedId={deletedId}/>
-            <Search changedId={changedId} deleteYear={deleteYear}/>
+            <div className="serches-form">
+                <Year changedYear={changedYear} deletedId={deletedId}/>
+                <Search changedId={changedId} deleteYear={deleteYear}/>
+            </div>
             <div className="leags-list">
                 {competitions ? 
                     competitions.map((item) => (
