@@ -26,6 +26,7 @@ const Leagues = ({ competitions, changedLink }) => {
 
     const changeLink = (id) => {
         changedLink(`competitions/${id}/matches`)
+        localStorage.setItem('data', `competitions/${id}/matches`);
     }
 
     const filteredTeams = (item) => {

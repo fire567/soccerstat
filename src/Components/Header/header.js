@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 const Header = ({ changedLink }) => {
 
     const changeLink = () => {
-        changedLink("competitions")
+        changedLink('competitions')
+        localStorage.setItem('data', 'competitions')
     }
 
     return(
